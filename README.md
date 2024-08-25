@@ -16,7 +16,7 @@ This project implements a simple Recruitment API using AWS CDK (Cloud Developmen
 ## Setup Instructions
 Clone the repository and install dependencies.
 
-[git clone https://github.com/toseef-ahmd/recruitment-api.git](git clone https://github.com/toseef-ahmd/recruitment-api.git)
+Git clone [https://github.com/toseef-ahmd/recruitment-api.git](https://github.com/toseef-ahmd/recruitment-api.git)
  
  ``` cd recruitment-api ```
 
