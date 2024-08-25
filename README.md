@@ -8,7 +8,7 @@ This project implements a simple Recruitment API using AWS CDK (Cloud Developmen
 - [API Endpoints](#api-endpoints)
 - [Testing](#testing)
 - [Deployment](#deployment)
-- [Contributing](#useful-commands)
+- [Useful Commands](#useful-commands)
 - [Diagram](#sequence-diagram)
 - [License](#license)
 
