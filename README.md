@@ -14,4 +14,5 @@ This project implements a simple Recruitment API using AWS CDK (Cloud Developmen
 
 # Setup and Installation
  ``` git clone https://github.com/your-username/recruitment-api.git  ```
- ``` cd cd recruitment-api ```
+ 
+ ``` cd recruitment-api ```
