@@ -9,6 +9,7 @@ This project implements a simple Recruitment API using AWS CDK (Cloud Developmen
 - [Testing](#testing)
 - [Deployment](#deployment)
 - [Contributing](#useful-commands)
+- [Diagram](#sequence-diagram)
 - [License](#license)
 
 
@@ -44,8 +45,6 @@ Use ``` cdk synth ``` to synthesize the cloudFormation template
 ![Diagram](./sequence-diagram/recruitment-api.drawio.png)
 
 The diagram in XML format can be found [here](./sequence-diagram/sequence-diagram.drawio)
-
-
 
 
 ## Licence 
