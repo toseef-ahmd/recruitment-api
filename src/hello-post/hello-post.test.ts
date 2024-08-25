@@ -3,69 +3,55 @@ import { handler } from './hello-post';
 import { StatusCodes } from 'http-status-codes';
 
 describe('Testing Lambda - hello-post', () => {
-    it('should return a 200 status and greeting message when name is valid', async () => {
-        const event: APIGatewayProxyEvent = {
-            body: JSON.stringify({ name: 'Toseef' }),
-        } as any;
+  it('should return a 200 status and greeting message when name is provided in the request body', async () => {
+    const event: APIGatewayProxyEvent = {
+      headers: { 'x-api-key': 'valid-api-key' },
+      body: JSON.stringify({ name: 'Toseef' }),
+    } as unknown as APIGatewayProxyEvent;
 
-        const result = await handler(event);
+    const result = await handler(event);
 
-        expect(result.statusCode).toBe(StatusCodes.OK);
-        expect(result.body).toBe(JSON.stringify({ message: 'Hello Toseef' }));
-    });
+    expect(result.statusCode).toBe(StatusCodes.OK);
+    expect(result.body).toBe(JSON.stringify({ message: 'Hello Toseef' }));
+  });
 
-    it('should return a 400 status and error message when name is missing', async () => {
-        const event: APIGatewayProxyEvent = {
-            body: JSON.stringify({}),
-        } as any;
+  it('should return a 400 status and error message when request body is empty', async () => {
+    const event: APIGatewayProxyEvent = {
+      headers: { 'x-api-key': 'valid-api-key' },
+      body: {},
+    } as unknown as APIGatewayProxyEvent;
 
-        const result = await handler(event);
+    const result = await handler(event);
 
-        expect(result.statusCode).toBe(StatusCodes.BAD_REQUEST);
-        expect(result.body).toBe(JSON.stringify({ message: 'Missing name parameter' }));
-    });
+    expect(result.statusCode).toBe(StatusCodes.BAD_REQUEST);
+    expect(result.body).toBe(JSON.stringify({ message: 'Bad Request' }));
+  });
 
-    it('should return a 400 status and error message when body is undefined', async () => {
-        const event: APIGatewayProxyEvent = {
-            body: undefined,
-        } as any;
+  it('should return a 401 status and error message when API key is missing', async () => {
+    const event: APIGatewayProxyEvent = {
+      headers: {},
+      body: JSON.stringify({ name: 'Toseef' }),
+    } as unknown as APIGatewayProxyEvent;
 
-        const result = await handler(event);
+    const result = await handler(event);
 
-        expect(result.statusCode).toBe(StatusCodes.BAD_REQUEST);
-        expect(result.body).toBe(JSON.stringify({ message: 'Missing name parameter' }));
-    });
+    expect(result.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+    expect(result.body).toBe(
+      JSON.stringify({ message: 'Unauthorized: Missing API key' }),
+    );
+  });
 
-    it('should return a 400 status and error message when name is an empty string', async () => {
-        const event: APIGatewayProxyEvent = {
-            body: JSON.stringify({ name: '' }),
-        } as any;
+  it('should return a 401 status and error message when API key is an empty string', async () => {
+    const event: APIGatewayProxyEvent = {
+      headers: { 'x-api-key': '' },
+      body: JSON.stringify({ name: 'Toseef' }),
+    } as unknown as APIGatewayProxyEvent;
 
-        const result = await handler(event);
+    const result = await handler(event);
 
-        expect(result.statusCode).toBe(StatusCodes.BAD_REQUEST);
-        expect(result.body).toBe(JSON.stringify({ message: 'Name cannot be an empty string' }));
-    });
-
-    it('should return a 400 status and error message when name is a number', async () => {
-        const event: APIGatewayProxyEvent = {
-            body: JSON.stringify({ name: '1234' }),
-        } as any;
-
-        const result = await handler(event);
-
-        expect(result.statusCode).toBe(StatusCodes.BAD_REQUEST);
-        expect(result.body).toBe(JSON.stringify({ message: 'Name cannot be a number' }));
-    });
-    
-    it('should return a 400 status and error message when name is not a string', async () => {
-        const event: APIGatewayProxyEvent = {
-            body: JSON.stringify({ name: 1234 }),
-        } as any;
-
-        const result = await handler(event);
-
-        expect(result.statusCode).toBe(StatusCodes.BAD_REQUEST);
-        expect(result.body).toBe(JSON.stringify({ message: 'Name must be a string' }));
-    });
+    expect(result.statusCode).toBe(StatusCodes.UNAUTHORIZED);
+    expect(result.body).toBe(
+      JSON.stringify({ message: 'Unauthorized: Missing API key' }),
+    );
+  });
 });

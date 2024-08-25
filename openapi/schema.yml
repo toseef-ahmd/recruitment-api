@@ -68,7 +68,6 @@ paths:
                 type: object
                 properties:
                   message:
-
                     type: string
                     example: Hello Jane Doe
         400: 

@@ -1,8 +1,8 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-import { RestApi, LambdaIntegration } from 'aws-cdk-lib/aws-apigateway';
+import { RestApi, LambdaIntegration, ApiKey, UsagePlan, Cors, ApiKeySourceType } from 'aws-cdk-lib/aws-apigateway';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { HttpMethod } from 'aws-cdk-lib/aws-events';
+import { CfnOutput } from 'aws-cdk-lib';
 
 export interface ApiGatewayProps {
   helloGetFunction: NodejsFunction;
@@ -13,14 +13,46 @@ export class ApiGateway extends Construct {
   constructor(scope: Construct, id: string, props: ApiGatewayProps) {
     super(scope, id);
 
-    const api: RestApi = new RestApi(this, id, { restApiName: 'RecruitmentApi' });
+    const api: RestApi = new RestApi(this, 'RestAPI', {
+      restApiName: 'RecruitmentApi',
+      defaultCorsPreflightOptions: {
+        allowOrigins: Cors.ALL_ORIGINS,
+        allowMethods: Cors.ALL_METHODS,
+      },
+      apiKeySourceType: ApiKeySourceType.HEADER,
+    });
+
+    const apiKey = new ApiKey(this, 'ApiKey');
+
+    const usagePlan = new UsagePlan(this, 'UsagePlan', {
+      name: 'Usage Plan',
+      apiStages: [
+        {
+          api,
+          stage: api.deploymentStage,
+        },
+      ],
+    });
+
+    usagePlan.addApiKey(apiKey);
+
+    const resourceHelloPost = api.root.addResource('hello'); 
+    const resourceHelloGet = resourceHelloPost.addResource('{name}');
+
+
+    const helloGetIntegration = new LambdaIntegration(props.helloGetFunction);
+    const helloPostIntegration = new LambdaIntegration(props.helloPostFunction);
 
     // GET /hello/{name}
-    const helloResource = api.root.addResource('hello'); // First add the 'hello' resource
-    const resourceHelloGet = helloResource.addResource('{name}'); // Then add the '{name}' resource as a child
-    resourceHelloGet.addMethod(HttpMethod.GET, new LambdaIntegration(props.helloGetFunction));
+    resourceHelloGet.addMethod(HttpMethod.GET, helloGetIntegration);
 
     // POST /hello
-    helloResource.addMethod(HttpMethod.POST, new LambdaIntegration(props.helloPostFunction));
+    resourceHelloPost.addMethod(HttpMethod.POST, helloPostIntegration);
+
+
+    new CfnOutput(this, 'API Key ID', {
+      value: apiKey.keyId,
+    });
   }
 }
+

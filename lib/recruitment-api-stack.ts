@@ -23,6 +23,7 @@ export class RecruitmentApiStack extends cdk.Stack {
       handler: 'handler', 
     });
 
+    
     // API Gateway and integrate it with the Lambda functions
     new ApiGateway(this, 'RecruitmentApiGateway', {
       helloGetFunction,
