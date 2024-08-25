@@ -41,7 +41,8 @@ Use ``` cdk destroy ``` to delete the stack and associated resources
 Use ``` cdk synth ``` to synthesize the cloudFormation template
 
 # Sequence Diagram
-![Diagram](./sequence-diagram/sequence-diagram.drawio)
+![Diagram](./sequence-diagram/sequence-diagram.drawio.png)
+
 The diagram in XML format can be found [here](./sequence-diagram/sequence-diagram.drawio)
 
 
