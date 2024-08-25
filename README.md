@@ -1,14 +1,13 @@
-# Welcome to your CDK TypeScript project
+# Recruitment API
 
-This is a blank project for CDK development with TypeScript.
+This project implements a simple Recruitment API using AWS CDK (Cloud Development Kit). The API provides two endpoints, one for handling `GET` requests and another for `POST` requests. Both endpoints are integrated with AWS Lambda functions written in TypeScript, with the infrastructure defined and deployed using AWS CDK.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Table of Contents
 
-## Useful commands
+- [Setup Instructions](#setup-instructions)
+- [API Endpoints](#api-endpoints)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
