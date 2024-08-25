@@ -18,7 +18,7 @@ describe('Testing Lambda - hello-post', () => {
   it('should return a 400 status and error message when request body is empty', async () => {
     const event: APIGatewayProxyEvent = {
       headers: { 'x-api-key': 'valid-api-key' },
-      body: {},
+      body: JSON.stringify({}),
     } as unknown as APIGatewayProxyEvent;
 
     const result = await handler(event);

@@ -12,7 +12,7 @@ export const handler = async (
       return apiKeyResult; // Return the unauthorized response if API key is missing
     }
 
-    const body = JSON.parse(event.body || '{}');
+    const body = event.body ? JSON.parse(event.body) : {};
     const name = body?.name;
 
     // Validate the name using the helper function
