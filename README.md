@@ -8,11 +8,11 @@ This project implements a simple Recruitment API using AWS CDK (Cloud Developmen
 - [API Endpoints](#api-endpoints)
 - [Testing](#testing)
 - [Deployment](#deployment)
-- [Contributing](#contributing)
+- [Contributing](#useful-commands)
 - [License](#license)
 
 
-# Installation and Setup
+## Setup Instructions
 Clone the repository and install dependencies.
 
  ``` git clone https://github.com/toseef-ahmd/recruitment-api.git  ```
@@ -21,13 +21,31 @@ Clone the repository and install dependencies.
 
  ``` npm install ```
 
-To test the code, run ``` npm run test ```
 
-It will run both unit and integration tests.
+## Testing
+Use ``` npm run test ``` to test the code. It will run both unit and integration tests.
 
-Use ``` npm run lint ``` to run the ESLint tool, which checks for any linting errors according to predefined rules. 
+## Deployment
+Use ``` cdk deploy ``` to deploy the code.
+
+## Useful Commands
+
+Use ``` npm run build ``` to build the project.
+
+Use ``` npm run lint ``` to check for any linting errors according to predefined rules and fix them. 
 
 Use ``` npm run format ``` to run prettier to automatically enforce consistent style rules across the codebase.
 
+Use ``` cdk destroy ``` to delete the stack and associated resources
+
+Use ``` cdk synth ``` to synthesize the cloudFormation template
+
+# Sequence Diagram
+![Diagram](./sequence-diagram/sequence-diagram.drawio)
+The diagram in XML format can be found [here](./sequence-diagram/sequence-diagram.drawio)
 
 
+
+
+## Licence 
+This project is licensed under the MIT License.
