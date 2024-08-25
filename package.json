@@ -11,6 +11,7 @@
     "cdk": "cdk"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.143",
     "@types/jest": "^29.5.12",
     "@types/node": "20.14.9",
     "aws-cdk": "2.154.1",
@@ -20,8 +21,13 @@
     "typescript": "~5.5.3"
   },
   "dependencies": {
+    "@aws-cdk/aws-apigateway": "^1.204.0",
+    "@aws-cdk/aws-lambda": "^1.204.0",
+    "@aws-cdk/aws-lambda-nodejs": "^1.204.0",
     "aws-cdk-lib": "^2.154.1",
     "constructs": "^10.3.0",
+    "http-method-enum": "^1.0.0",
+    "http-status-codes": "^2.3.0",
     "source-map-support": "^0.5.21"
   }
 }
