@@ -3,7 +3,7 @@ import { handler } from './hello-get';
 import { StatusCodes } from 'http-status-codes';
 
 describe('Testing Lambda - hello-get', () => {
-  it('should return a 200 status and greeting message when name is provided', async () => {
+  it('should return 200 status and greeting message when name is provided', async () => {
     const event: APIGatewayProxyEvent = {
       pathParameters: { name: 'Toseef Ahmed' },
     } as unknown as APIGatewayProxyEvent;
