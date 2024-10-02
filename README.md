@@ -1,5 +1,5 @@
 # Recruitment API
-testing ssh again
+testing ssh again for auth
 This project implements a simple Recruitment API using AWS CDK (Cloud Development Kit). The API provides two endpoints, one for handling `GET` requests and another for `POST` requests. Both endpoints are integrated with AWS Lambda functions written in TypeScript, with the infrastructure defined and deployed using AWS CDK.
 
 ## Table of Contents
